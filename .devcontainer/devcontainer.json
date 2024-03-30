@@ -1,0 +1,40 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/dotnet-postgres
+{
+    "name": "Asys DEV Environment",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+    // Features to add to the dev container. More info: https://containers.dev/features.
+    // "features": {},
+    // Configure tool-specific properties.
+    // "customizations": {},
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+
+    "forwardPorts": [7076, 3306],
+    "portsAttributes": {
+        "7076": {
+            "protocol": "https"
+        }
+    },
+    // Use 'postCreateCommand' to run commands after the container is created.
+	//  NombreProyecto CarpetaRaiz Correo Usuario versionNet
+    "postCreateCommand": "bash .devcontainer/config/setup.sh 'Tienda' '${localWorkspaceFolderBasename}' 'jmdelan2012@gmail.com' 'jmdelan2012' '8.0' 'AsexHt5W9xT'",
+    //"postCreateCommand": "dotnet tool install --global dotnet-ef --version  8.0 && dotnet new sln -n Asys && dotnet restore ",
+    "remoteEnv": {
+        "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
+        "ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx"
+    },
+    "mounts": [ "source=${env:HOME}${env:USERPROFILE}/.aspnet/https,target=/home/vscode/.aspnet/https,type=bind" ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "GitHub.copilot",
+                "GitHub.copilot-chat",
+                "kreativ-software.csharpextensions"
+            ]
+        }
+    },
+    // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+    "remoteUser": "root"
+}
