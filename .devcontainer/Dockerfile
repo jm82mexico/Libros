@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/dotnet:1-8.0
+FROM mcr.microsoft.com/devcontainers/dotnet:1-7.0
 USER root
 # Add .NET Core SDK tools to PATH
 RUN echo 'export PATH="$PATH:/root/.dotnet/tools"' >> ~/.bashrc

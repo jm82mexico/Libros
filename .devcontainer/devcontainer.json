@@ -19,7 +19,7 @@
     },
     // Use 'postCreateCommand' to run commands after the container is created.
 	//  NombreProyecto CarpetaRaiz Correo Usuario versionNet
-    "postCreateCommand": "bash .devcontainer/config/setup.sh 'Tienda' '${localWorkspaceFolderBasename}' 'jmdelan2012@gmail.com' 'jmdelan2012' '8.0' 'AsexHt5W9xT'",
+    "postCreateCommand": "bash .devcontainer/config/setup.sh 'Tienda' '${localWorkspaceFolderBasename}' 'jmdelan2012@gmail.com' 'jmdelan2012' '7.0' 'AsexHt5W9xT'",
     //"postCreateCommand": "dotnet tool install --global dotnet-ef --version  8.0 && dotnet new sln -n Asys && dotnet restore ",
     "remoteEnv": {
         "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
