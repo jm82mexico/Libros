@@ -19,7 +19,10 @@ namespace Tienda.Infrastructure.Persistence
                     var builder = new DbContextOptionsBuilder<StreamerDbContext>();
                     var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-                    builder.UseMySQL(connectionString);
+                    if (!string.IsNullOrEmpty(connectionString))
+                    {
+                        builder.UseMySQL(connectionString);
+                    }
 
                     return new StreamerDbContext(builder.Options);
                 }
