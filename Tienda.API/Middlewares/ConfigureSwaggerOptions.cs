@@ -29,7 +29,7 @@ namespace Tienda.API.Middlewares
         {
             var info = new OpenApiInfo()
             {
-                Title = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name} - Powered by Nexonify®️",
+                Title = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name} - Powered by AngelSystem",
                 Version = desc.ApiVersion.ToString()
             };
 
