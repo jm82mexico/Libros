@@ -20,7 +20,7 @@ namespace Tienda.Infrastructure
                 options.UseMySQL(configuration.GetConnectionString("DefaultConnection"))
             );
 
-            //services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IAsyncRepository<>),typeof(RepositoryBase<>));
             services.AddScoped<IStreamerRepository, StreamerRepository>();
             services.AddScoped<IVideoRepository, VideoRepository>();
