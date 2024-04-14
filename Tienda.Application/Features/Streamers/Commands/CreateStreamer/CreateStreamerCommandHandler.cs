@@ -10,22 +10,32 @@ namespace Tienda.Application.Features.Streamers.Commands.CreateStreamer
 {
     public class CreateStreamerCommandHandler : IRequestHandler<CreateStreamerCommand, int>
     {
-        private readonly IStreamerRepository _streamerRepository;
+        //private readonly IStreamerRepository _streamerRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IEmailService _emailService;
         private readonly ILogger<CreateStreamerCommandHandler> _logger;
 
-        public CreateStreamerCommandHandler(IMapper mapper, IStreamerRepository streamerRepository, IEmailService emailService, ILogger<CreateStreamerCommandHandler> logger)
+        public CreateStreamerCommandHandler(IMapper mapper, IUnitOfWork unitOfWork, IEmailService emailService, ILogger<CreateStreamerCommandHandler> logger)
         {
             _mapper = mapper;
-            _streamerRepository = streamerRepository;
+            _unitOfWork = unitOfWork;
             _emailService = emailService;
             _logger = logger;
         }
         public async Task<int> Handle(CreateStreamerCommand request, CancellationToken cancellationToken)
         {
             var streamerEntity = _mapper.Map<Streamer>(request);
-            var newStreamer = await _streamerRepository.AddAsync(streamerEntity);           
+            //var newStreamer = await _streamerRepository.AddAsync(streamerEntity);         
+            _unitOfWork.StreamerRepository.AddAsync(streamerEntity);
+
+            var result = await _unitOfWork.Complete();
+
+            if (result == 0)
+            {
+                throw new ApplicationException("There was an error creating the streamer");
+            }
+              
             
             string message = $"Streamer {streamerEntity.Nombre} was created.";
             _logger.LogInformation(message: message);

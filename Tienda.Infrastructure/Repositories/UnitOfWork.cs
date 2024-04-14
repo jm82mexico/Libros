@@ -11,6 +11,13 @@ namespace Tienda.Infrastructure.Repositories
         private Hashtable _repositories;
         private readonly StreamerDbContext _dbContext;
 
+        private IVideoRepository _videoRepository;
+        private IStreamerRepository _streamerRepository;
+
+        //INYECCION VIA PROPIEDADES
+        public IVideoRepository VideoRepository => _videoRepository ??= new VideoRepository(_dbContext);
+        public IStreamerRepository StreamerRepository => _streamerRepository ??= new StreamerRepository(_dbContext);
+
         public UnitOfWork(StreamerDbContext dbContext)
         {
             _dbContext = dbContext;

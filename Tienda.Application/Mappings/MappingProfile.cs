@@ -1,6 +1,7 @@
 using AutoMapper;
 using Tienda.Application.Features.Director.Commands.CreateDirector;
 using Tienda.Application.Features.Streamers.Commands.CreateStreamer;
+using Tienda.Application.Features.Streamers.Commands.UpdateStreamer;
 using Tienda.Application.Features.Videos.Queries.GetVideosList;
 using Tienda.Domain;
 
@@ -13,6 +14,7 @@ namespace Tienda.Application.Mappings
             CreateMap<Video,VideosVm>();
             CreateMap<CreateStreamerCommand, Streamer>();
             CreateMap<CreateDirectorCommand, Director>();
+            CreateMap<UpdateStreamerCommand, Streamer>();
         }
     }
 }
