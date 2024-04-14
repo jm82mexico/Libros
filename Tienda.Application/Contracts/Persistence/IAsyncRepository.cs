@@ -25,6 +25,7 @@ namespace Tienda.Application.Contracts.Persistence
         Task DeleteAsync(T entity);
 
         //Metodos de unit of work
+        //Metodos para uso de unit of work
         void AddEntity(T entity);
         void UpdateEntity(T entity);
         void DeleteEntity(T entity);
