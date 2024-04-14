@@ -9,7 +9,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace Tienda.Identity.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialIdentity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -185,8 +185,8 @@ namespace Tienda.Identity.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Apellidos", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Nombre", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "d2e250d3-60ff-45aa-ae4b-d24297af0714", 0, "Sanchez", "7017ccdc-0b95-4573-8105-fc6d182ab9c9", "luche@localhost.com", true, false, null, "Luche", "LUCHE@LOCALHOST.COM", "LUCHE", "AQAAAAIAAYagAAAAEDy2oWOMXqT3Mp4THiO84X+P/LG5UL1Kg6mYCHKUKgPO01SpyPv1ogpevhWbDK1ziA==", null, false, "124b908e-6fc6-43c0-965e-da208c269e77", false, "luche" },
-                    { "f803b71f-696e-4bc0-8c84-38b2811a775a", 0, "Del Angel", "787639a3-a1b3-423b-bfa2-c53d46873368", "juanchi@localhost.com", true, false, null, "Juachi", "JUANCHI@LOCALHOST.COM", "JUANCHI", "AQAAAAIAAYagAAAAEHdIhc0FWwZTNKl9qQbrTpAnu4Ja7A16V626y1WmmUEpyjfjlsY4GhrAAoRnz3ptcA==", null, false, "b499e3d3-b06a-418e-8e7c-7742a1157800", false, "juanchi" }
+                    { "d2e250d3-60ff-45aa-ae4b-d24297af0714", 0, "Sanchez", "083290f9-24e8-4d24-b4ea-d39a4778c528", "luche@localhost.com", true, false, null, "Luche", "LUCHE@LOCALHOST.COM", "LUCHE", "AQAAAAIAAYagAAAAELgbtN+Toe7CaZJZ8pYxdNfVfgjw3oc9A2nsr08PKwG1sIZ9Xv+nskZpF3CNMDE8bA==", null, false, "1e987c1f-15dc-44e2-8098-bdabf170b488", false, "luche" },
+                    { "f803b71f-696e-4bc0-8c84-38b2811a775a", 0, "Del Angel", "66ac8af5-3685-4116-9581-57d609f7c614", "juanchi@localhost.com", true, false, null, "Juachi", "JUANCHI@LOCALHOST.COM", "JUANCHI", "AQAAAAIAAYagAAAAEPJ35sIpJMiuPKty8wz660Hed0EZ8VJIkhF9aKaED5nuwF2kGrJm0ButRDwQz/BKAw==", null, false, "750be73a-12ac-4a10-8cc8-976360e95198", false, "juanchi" }
                 });
 
             migrationBuilder.InsertData(

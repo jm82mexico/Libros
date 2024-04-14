@@ -9,6 +9,8 @@ using Microsoft.OpenApi.Models;
 using Tienda.API.Middlewares;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Tienda.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 try
 {
 
@@ -120,6 +122,29 @@ try
     app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
     app.UseCors("CorsPolicy");
     app.MapControllers();
+
+    //Configurar las migraciones
+    using (var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+        try
+        {
+            var context = services.GetRequiredService<StreamerDbContext>();
+            await context.Database.MigrateAsync();
+            await StreamerDbContextSeed.SeedAsync(context, loggerFactory);
+            await StreamerDbContextSeedData.LoadDataAsync(context,loggerFactory);
+
+            var contextIdentity = services.GetRequiredService<IdentityDbContext>();
+            await contextIdentity.Database.MigrateAsync();
+            
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "An error occurred while migrating the database.");
+        }
+    }
+
     app.Run();
 }
 catch (Exception ex)
