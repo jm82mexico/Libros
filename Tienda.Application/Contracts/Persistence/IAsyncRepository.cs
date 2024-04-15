@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using Tienda.Application.Specifications;
 using Tienda.Domain.Common;
 
 namespace Tienda.Application.Contracts.Persistence
@@ -31,8 +32,8 @@ namespace Tienda.Application.Contracts.Persistence
         void DeleteEntity(T entity);
         
         //Metodos de specification
-        /* Task<T> GetByIdWithSpec(ISpecification<T> spec);
+        Task<T> GetByIdWithSpec(ISpecification<T> spec);
         Task<IReadOnlyList<T>> GetAllWithSpec(ISpecification<T> spec);//Se corrige para que devuelva una lista por la implementacion del paginado
-        Task<int> CountAsync(ISpecification<T> spec); */
+        Task<int> CountAsync(ISpecification<T> spec); 
     }
 }

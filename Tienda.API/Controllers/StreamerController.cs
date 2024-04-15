@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Tienda.Application.Features.Streamers.Commands.CreateStreamer;
 using Tienda.Application.Features.Streamers.Commands.DeleteStreamer;
 using Tienda.Application.Features.Streamers.Commands.UpdateStreamer;
+using Tienda.Application.Features.Streamers.Queries.GetStreamerListByUrl;
 using Tienda.Application.Features.Streamers.Queries.GetStreamerListByUsername;
 using Tienda.Application.Features.Streamers.Vms;
 
@@ -55,6 +56,15 @@ namespace Tienda.API.Controllers
         public async Task<ActionResult<IEnumerable<StreamersVm>>> GetStreamersByUsername(string username)
         {
             var query = new GetStreamerListQuery(username);
+            var streamers = await _mediator.Send(query);
+            return Ok(streamers);
+        }
+
+        [HttpGet("ByUrl/{url}", Name = "GetStreamersByUrl")]
+        [ProducesResponseType(typeof(IEnumerable<StreamersVm>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<StreamersVm>>> GetStreamersByUrl(string url)
+        {
+            var query = new GetStreamerListByUrlQuery(url);
             var streamers = await _mediator.Send(query);
             return Ok(streamers);
         }

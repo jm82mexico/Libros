@@ -2,7 +2,9 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Tienda.Application.Contracts.Persistence;
+using Tienda.Application.Specifications;
 using Tienda.Domain.Common;
+using Tienda.Infrastructure.Specification;
 
 namespace Tienda.Infrastructure.Persistence
 {
@@ -80,7 +82,7 @@ namespace Tienda.Infrastructure.Persistence
             _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();
         }
-
+        //metodos de unit of work
         public void AddEntity(T entity)
         {
              _context.Set<T>().Add(entity);
@@ -95,6 +97,28 @@ namespace Tienda.Infrastructure.Persistence
         public void DeleteEntity(T entity)
         {
             _context.Set<T>().Remove(entity);
+        }
+        //Metodos de specification
+        public async Task<T> GetByIdWithSpec(ISpecification<T> spec)
+        {
+            return await ApplySpecification(spec).FirstOrDefaultAsync();
+        }
+
+        public async Task<IReadOnlyList<T>> GetAllWithSpec(ISpecification<T> spec)//Se corrige para que devuelva una lista por la implementacion del paginado
+        {
+            return await ApplySpecification(spec).ToListAsync();
+        }
+
+        public async Task<int> CountAsync(ISpecification<T> spec)
+        {
+            return await ApplySpecification(spec).CountAsync();
+        }
+
+        //Metodo para aplicar los criterios de busqueda
+        
+        private IQueryable<T> ApplySpecification(ISpecification<T> spec)
+        {
+            return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), spec);
         }
     }
 }
